@@ -24,7 +24,7 @@
         display: flex;
         width: 60%;
         height: auto; 
-        animation: slide 10s linear infinite; /* Defina a animação: nome, duração, timing function e repetição infinita */
+        animation: slide 8s linear infinite; /* Defina a animação: nome, duração, timing function e repetição infinita */
     }
 
     /* A animação de deslize */
@@ -32,6 +32,20 @@
         0% { transform: translateY(0); } /* No início, a imagem está na posição inicial */
         100% { transform: translateY(100%); } /* No final, a imagem se move para cima */
     }
+    .player-info {
+        position: absolute; /* Posicionamento absoluto para mover livremente */
+        bottom: 20px; /* Distância da parte inferior da tela */
+        right: 20px; /* Distância da parte direita da tela */
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparente */
+        color: white;
+        font-family: cursive;
+      }
+
+      .player-info{
+        font-size: 25px;
+        margin-bottom: 5px;
+      }
 
     body{
         margin: 0;
@@ -43,9 +57,16 @@
 </head>
 <body>
     <div class="image-container">
-        <div><img class="looping-image" src="./0.png" alt="Imagem em loop vertical"></div>  
-        <div><img class="looping-image" src="./0.png" alt="Imagem em loop vertical"></div>
-        <div><img class="looping-image" src="./0.png" alt="Imagem em loop vertical"></div>
+        <div><img class="looping-image" src="/imagens/0.png" alt="Imagem em loop vertical"></div>  
+        <div><img class="looping-image" src="/imagens/0.png" alt="Imagem em loop vertical"></div>
+        <div><img class="looping-image" src="/imagens/0.png" alt="Imagem em loop vertical"></div>
     </div>
+
+    <div class="player-info">
+        <img src="/imagens/gasolina.png" alt="Ícone do jogador"> <span id="player-life">Vida: 100</span>
+        <br>
+        <img src="/imagens/dano.png" alt="Ícone do jogador"> <span id="player-life">Dano Sofrido: 0</span>
+    </div>
+
 </body>
 </html>
