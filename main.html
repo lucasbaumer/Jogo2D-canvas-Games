@@ -1,2 +1,41 @@
-<h1>olá Mundo!!</h1>
-<h2>IMAGEM</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loop Vertical</title>
+<style>
+    /* Estilos para o contêiner da imagem */
+    .image-container {
+        
+        overflow: hidden; /* Esconda as partes da imagem que ultrapassam o contêiner */
+        display: flex;
+        flex-direction: column; /* Empilhe os contêineres verticalmente */
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Estilos para a imagem */
+    .looping-image {
+        height: 100%; /* Ajustado para 100% para preencher a altura do contêiner */
+        animation: slide 6s linear infinite; /* Defina a animação: nome, duração, timing function e repetição infinita */
+    }
+
+    /* A animação de deslize */
+    @keyframes slide {
+        0% { transform: translateY(0); } /* No início, a imagem está na posição inicial */
+        100% { transform: translateY(-100%); } /* No final, a imagem se move para cima */
+    }
+</style>
+</head>
+<body>
+    <div class="image-container">
+        <div>
+            <img class="looping-image" src="./0.png" alt="Imagem em loop vertical">
+        </div>
+        <div>
+            <img class="looping-image" src="./0.png" alt="Imagem em loop vertical">
+        </div>
+    </div>
+</body>
+</html>
