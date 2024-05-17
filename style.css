@@ -1,0 +1,60 @@
+body{
+    margin: 0;
+    width: 128%;
+    overflow-x: hidden;
+    background-color: #7F9F29;
+}
+.containercarro {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    position: absolute;
+    bottom: 0;  
+    width: 100%; /* Ocupa toda a largura do elemento pai */
+    height: 100%; /* Ocupa toda a altura do elemento pai */
+}
+#canvas {
+    width: 372px;
+    height: 100%;
+    /* border: 2px solid black; */
+
+}
+/* Estilos para o contêiner da imagem */
+.image-container {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+}
+
+/* Estilos para a imagem */
+.looping-image {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    width: 60%;
+    height: auto; 
+    animation: slide 8s linear infinite; /* Defina a animação: nome, duração, timing function e repetição infinita */
+}
+/* A animação de deslize */
+@keyframes slide {
+    0% { transform: translateY(0); } /* No início, a imagem está na posição inicial */
+    100% { transform: translateY(100%); } /* No final, a imagem se move para cima */
+}
+.player-info {
+    position: absolute; /* Posicionamento absoluto para mover livremente */
+    bottom: 20px; /* Distância da parte inferior da tela */
+    right: 20px; /* Distância da parte direita da tela */
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparente */
+    color: white;
+    font-family: cursive;
+  }
+  .player-info{
+    font-size: 25px;
+    margin-bottom: 5px;
+  }

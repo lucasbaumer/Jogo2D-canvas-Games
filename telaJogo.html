@@ -3,58 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 <link rel="icon" href="/imagens/favicon.ico">
+
 <title>Blaze Driver</title>
-<style>
-    /* Estilos para o contêiner da imagem */
-    .image-container {
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        
-    }
-    
-    /* Estilos para a imagem */
-    .looping-image {
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        display: flex;
-        width: 60%;
-        height: auto; 
-        animation: slide 8s linear infinite; /* Defina a animação: nome, duração, timing function e repetição infinita */
-    }
-
-    /* A animação de deslize */
-    @keyframes slide {
-        0% { transform: translateY(0); } /* No início, a imagem está na posição inicial */
-        100% { transform: translateY(100%); } /* No final, a imagem se move para cima */
-    }
-    .player-info {
-        position: absolute; /* Posicionamento absoluto para mover livremente */
-        bottom: 20px; /* Distância da parte inferior da tela */
-        right: 20px; /* Distância da parte direita da tela */
-        padding: 10px;
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparente */
-        color: white;
-        font-family: cursive;
-      }
-
-      .player-info{
-        font-size: 25px;
-        margin-bottom: 5px;
-      }
-
-    body{
-        margin: 0;
-        width: 128%;
-        overflow-x: hidden;
-        background-color: #7F9F29;
-    }
-</style>
 </head>
 <body>
     <div class="image-container">
@@ -68,6 +20,11 @@
         <br>
         <img src="/imagens/dano.png" alt="Ícone do jogador"> <span id="player-life">Dano Sofrido: 0</span>
     </div>
-
+    <div class="containercarro">
+    <canvas id="canvas"></canvas>
+    </div>
 </body>
+<footer>
+    <script type="module" src="./modules/game/bouncingBall.mjs"></script>
+</footer>
 </html>
