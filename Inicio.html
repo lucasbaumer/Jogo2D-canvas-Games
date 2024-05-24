@@ -33,28 +33,13 @@
         margin-bottom: 40px;
     }
 
-    .start-screen a {
-        text-decoration: none; /* Remove underline */
-        color: white;
-      }
+ 
     
-    #start-button {
-        padding: 15px 30px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-size: 1.6rem;
-        transition: background-color 0.3s ease;
-    }
-    
-    #start-button:hover {
-        background-color: #054488;
-    }
+ 
     
     .alunos{
         position: absolute; 
-        bottom: 6px; 
+        bottom: 15px; 
         right: 20px;
         padding: 10px;
         color: white;
@@ -65,12 +50,172 @@
 <body>
     <div class="start-screen">
         <h1>Blaze Driver</h1>
-        <img src="/imagens/blaze.png" alt="Blaze_image" width="200px">
+        <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel de Imagens</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .carousel-container {
+            width: 70%;
+            max-width: 600px;
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+            border-radius: 15px;
+            background-color: #2a7ce7;
+        }
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-item {
+            min-width: 100%;
+            max-width: 100%;
+            text-align: center;
+        }
+        .carousel-item img {
+            width: 100%;
+            border: none;
+        }
+        .carousel-item button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .carousel-item button:hover {
+            background-color: #6b0000;
+        }
+        .nav-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .nav-buttons button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .nav-buttons button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+<div class="carousel-container">
+    <div class="carousel-slide">
+        <div class="carousel-item">
+            <img src="./imagens/Blaze.jpg" alt="Imagem 1">
+            <h2>Blaze</h2>
+            <button class="select-btn" data-value="Blaze">Selecionar</button>
+        </div>
+        <div class="carousel-item">
+            <img src="./imagens/AmigoBleze_Crusher.jpg" alt="Imagem 2">
+            <h2>Crusher</h2>
+            <button class="select-btn" data-value="Crusher">Selecionar</button>
+        </div>
+        <div class="carousel-item">
+            <img src="./imagens/AmigoBleze_Darington.jpg" alt="Imagem 3">
+            <h2>Darington</h2>
+            <button class="select-btn" data-value="Darington">Selecionar</button>
+        </div>
+        <div class="carousel-item">
+            <img src="./imagens/AmigoBleze_Starla.jpg" alt="Imagem 4">
+            <h2>Starla</h2>
+            <button class="select-btn" data-value="Starla">Selecionar</button>
+        </div>
+        <div class="carousel-item">
+            <img src="./imagens/AmigoBleze_Stripes.jpg" alt="Imagem 5">
+            <h2>Stripes</h2>
+            <button class="select-btn" data-value="Stripes">Selecionar</button>
+        </div>
+        <div class="carousel-item">
+            <img src="./imagens/AmigoBleze_zeg.jpg" alt="Imagem 6">
+            <h2>Zeg</h2>
+            <button class="select-btn" data-value="Zeg">Selecionar</button>
+        </div>
+    </div>
+    <div class="nav-buttons">
+        <button id="prevBtn">Anterior</button>
+        <button id="nextBtn">Próximo</button>
+    </div>
+</div>
+
+<script>
+    const carouselSlide = document.querySelector('.carousel-slide');
+    const carouselItems = document.querySelectorAll('.carousel-item');
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const selectBtns = document.querySelectorAll('.select-btn');
+
+    let counter = 0;
+    const size = carouselItems[0].clientWidth;
+
+    function updateCarousel() {
+        if (counter >= carouselItems.length) {
+            counter = 0;
+        } else if (counter < 0) {
+            counter = carouselItems.length - 1;
+        }
+        carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+    }
+
+    nextBtn.addEventListener('click', () => {
+        counter++;
+        updateCarousel();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        counter--;
+        updateCarousel();
+    });
+
+    selectBtns.forEach((btn) => {
+        btn.addEventListener('click', (event) => {
+            const value = event.target.getAttribute('data-value');
+            urlPersonagem = 'PresonagemSelecionado=' + value;
+            window.location.href = "telajogo.html?" + urlPersonagem;
+        });
+    });
+
+    // Ajustar a posição inicial
+    updateCarousel();
+
+    // Recalcular tamanho da imagem ao redimensionar a janela
+    window.addEventListener('resize', () => {
+        const newSize = carouselItems[0].clientWidth;
+        carouselSlide.style.transition = 'none';
+        carouselSlide.style.transform = 'translateX(' + (-newSize * counter) + 'px)';
+        setTimeout(() => {
+            carouselSlide.style.transition = 'transform 0.5s ease-in-out';
+        }, 0);
+    });
+</script>
+
+</body>
+</html>
         <p>Controle o blaze em uma aventura muito desafiadora!!</p>
-        <a href="telaJogo.html" id="start-button">Iniciar</a>
     </div>
 
-    
     <div class="alunos">
         <p>Desenvolvedores: Lucas Baumer, Matheus Kormann, Murilo Mayer</p>        
     </div>
