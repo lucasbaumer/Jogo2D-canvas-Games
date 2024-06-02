@@ -1,25 +1,28 @@
-body{
+body {
     margin: 0;
     width: 128%;
     overflow-x: hidden;
     background-color: #7F9F29;
 }
-.containercarro {
-    display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
+
+.containerJogo {
     position: absolute;
-    bottom: 0;  
-    width: 100%; /* Ocupa toda a largura do elemento pai */
-    height: 100%; /* Ocupa toda a altura do elemento pai */
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 154px;
 }
+
 #canvas {
-    width: 372px;
+    width: 448px;
     height: 100%;
     /* border: 2px solid black; */
-
 }
-/* Estilos para o contêiner da imagem */
+
 .image-container {
     overflow: hidden;
     display: flex;
@@ -27,34 +30,75 @@ body{
     align-items: center;
     justify-content: center;
     height: 100vh;
-    
 }
 
-/* Estilos para a imagem */
 .looping-image {
     justify-content: center;
     flex-direction: column;
     align-items: center;
     display: flex;
-    width: 60%;
-    height: auto; 
-    animation: slide 8s linear infinite; /* Defina a animação: nome, duração, timing function e repetição infinita */
+    width: 70%;
+    height: auto;
+    animation: slide 8s linear infinite;
 }
-/* A animação de deslize */
+
 @keyframes slide {
-    0% { transform: translateY(0); } /* No início, a imagem está na posição inicial */
-    100% { transform: translateY(100%); } /* No final, a imagem se move para cima */
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100%); }
 }
+
 .player-info {
-    position: absolute; /* Posicionamento absoluto para mover livremente */
-    bottom: 20px; /* Distância da parte inferior da tela */
-    right: 20px; /* Distância da parte direita da tela */
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparente */
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
     font-family: cursive;
-  }
-  .player-info{
-    font-size: 25px;
-    margin-bottom: 5px;
-  }
+}
+
+.player-info img {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+#obstacles-container {
+    position: absolute;
+    top: 0;
+    width: 448px; /* Ensure this matches the width of your canvas */
+    height: 100%;
+    pointer-events: none;
+}
+
+.obstacle, .repair-kit {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0;
+}
+
+/* Adicione estes estilos no seu arquivo CSS */
+.obstacle.type1 {
+    background-color: red; /* Exemplo de cor */
+    width: 50px;
+    height: 50px;
+}
+
+.obstacle.type2 {
+    background-color: rgb(255, 0, 212); /* Exemplo de cor */
+    width: 60px;
+    height: 60px;
+}
+
+.obstacle.type3 {
+    background-color: rgb(0, 9, 128); /* Exemplo de cor */
+    width: 70px;
+    height: 70px;
+}
+
+/* Adicione mais tipos conforme necessário */
+
+
+.repair-kit {
+    background-color: green;
+}
