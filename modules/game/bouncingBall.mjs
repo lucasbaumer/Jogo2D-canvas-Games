@@ -46,8 +46,7 @@ function update(time) {
     if (down('ArrowLeft') && x > 69.5) x -= velocity * time;
     // Move o carro para a direita se a tecla de seta direita estiver pressionada
     else if (down('ArrowRight') && x <= canvas.width - 8.5) x += velocity * time;
-    console.log(`Posição atualizada: x=${x}, y=${y}`);
-    let yCarro = y;
+    // console.log(`Posição atualizada: x=${x}, y=${y}`);
 }
 
 // Função de desenho para renderizar o carro no canvas
@@ -57,7 +56,6 @@ function draw(ctx) {
 
     // Desenha a imagem do carro na posição atual, se a imagem estiver carregada
     if (image.complete) {
-        console.log('Desenhando a imagem');
         ctx.drawImage(image, x - 72.5, y, 85, 22); // Desenha a imagem do carro
     } else {
         console.log('Imagem não carregada ainda');
@@ -122,13 +120,15 @@ function moveObstacles() {
         } else {
             // Move o obstáculo para baixo
             obstacle.style.top = obstacleTop + 6 + 'px';
+            
+            // Atualiza dinamicamente a posição y do carro
+            let yCarro = 555; // Posição atual do carro
 
             // Verifica a colisão com o carro
-            // mudar o valor de 825 para o valor da posição do carro
-            if (obstacleTop + 50 >= 885 && obstacleTop <= 885 + 22 && Math.abs(x - parseInt(obstacle.style.left)) < 30) {
+            if (obstacleTop + 50 >= yCarro && obstacleTop <= yCarro + 22 && Math.abs(x - parseInt(obstacle.style.left)) < 30) {
                 if (obstacle.classList.contains('repair-kit')) {
                     // Kit de reparo: aumenta a vida do jogador
-                    playerLife = Math.min(playerLife + 20, 100); // Aumenta a vida, mas não passa de 100
+                    playerLife = Math.min(playerLife + 50, 100); // Aumenta a vida, mas não passa de 100
                 } else if (obstacle.classList.contains('type1')) {
                     // Tipo de obstáculo 1: diminui a vida do jogador
                     playerLife -= 20;

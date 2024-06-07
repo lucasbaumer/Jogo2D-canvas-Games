@@ -61,11 +61,10 @@ body {
     vertical-align: middle;
     margin-right: 5px;
 }
-
 #obstacles-container {
     position: absolute;
     top: 0;
-    width: 448px; /* Ensure this matches the width of your canvas */
+    width: 448px; /* Certifique-se de que isso corresponda à largura do seu canvas */
     height: 100%;
     pointer-events: none;
 }
@@ -77,28 +76,37 @@ body {
     top: 0;
 }
 
-/* Adicione estes estilos no seu arquivo CSS */
+.obstacle {
+    background-size: cover; /* Garante que a imagem cubra todo o elemento */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+}
+
+/* Diferentes tipos de obstáculos */
 .obstacle.type1 {
-    background-color: red; /* Exemplo de cor */
+    background-image: url('./imagens/cone.png');
     width: 50px;
     height: 50px;
 }
 
 .obstacle.type2 {
-    background-color: rgb(255, 0, 212); /* Exemplo de cor */
+    background-image: url('./imagens/barreira-de-transito.png');
     width: 60px;
     height: 60px;
 }
 
 .obstacle.type3 {
-    background-color: rgb(0, 9, 128); /* Exemplo de cor */
-    width: 70px;
-    height: 70px;
+    background-image: url('./imagens/carro.png');
+    width: 90px;
+    height: 90px;
 }
 
-/* Adicione mais tipos conforme necessário */
-
-
+/* Ajuste o tamanho e a proporção da imagem do repair-kit */
 .repair-kit {
-    background-color: green;
+    width: 50px; /* Ajuste conforme necessário */
+    height: 50px; /* Ajuste conforme necessário */
+    background-image: url('./imagens/chave-inglesa.png');
+    background-size: contain; /* Ajusta a imagem para caber dentro do elemento */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    background-position: center; /* Centraliza a imagem dentro do elemento */
 }
+
