@@ -1,43 +1,50 @@
 body {
     margin: 0;
-    width: 128%;
-    overflow-x: hidden;
-    background-color: #7F9F29;
-}
-
-.containerJogo {
-    position: absolute;
-    top: 0;
     width: 100%;
     height: 100vh;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 154px;
+    background-color: #7F9F29;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+
+.containerJogo {
+    position: relative;
+    width: 448px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #canvas {
     width: 448px;
     height: 100%;
-    /* border: 2px solid black; */
 }
 
 .image-container {
-    overflow: hidden;
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    width: 648px;
+    overflow: hidden;
 }
 
 .looping-image {
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    display: flex;
-    width: 70%;
+    width: 100%;
     height: auto;
     animation: slide 8s linear infinite;
 }
@@ -61,10 +68,11 @@ body {
     vertical-align: middle;
     margin-right: 5px;
 }
+
 #obstacles-container {
     position: absolute;
     top: 0;
-    width: 448px; /* Certifique-se de que isso corresponda à largura do seu canvas */
+    width: 448px;
     height: 100%;
     pointer-events: none;
 }
@@ -77,11 +85,10 @@ body {
 }
 
 .obstacle {
-    background-size: cover; /* Garante que a imagem cubra todo o elemento */
-    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-/* Diferentes tipos de obstáculos */
 .obstacle.type1 {
     background-image: url('./imagens/cone.png');
     width: 50px;
@@ -100,13 +107,33 @@ body {
     height: 90px;
 }
 
-/* Ajuste o tamanho e a proporção da imagem do repair-kit */
 .repair-kit {
-    width: 50px; /* Ajuste conforme necessário */
-    height: 50px; /* Ajuste conforme necessário */
+    width: 50px;
+    height: 50px;
     background-image: url('./imagens/chave-inglesa.png');
-    background-size: contain; /* Ajusta a imagem para caber dentro do elemento */
-    background-repeat: no-repeat; /* Evita que a imagem se repita */
-    background-position: center; /* Centraliza a imagem dentro do elemento */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+}

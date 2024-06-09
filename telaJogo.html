@@ -8,20 +8,25 @@
 <title>Blaze Driver</title>
 </head>
 <body>
-    <div class="image-container">
-        <div><img class="looping-image" src="/imagens/0.png" alt="Imagem em loop vertical"></div>  
-        <div><img class="looping-image" src="/imagens/0.png" alt="Imagem em loop vertical"></div>
-        <div><img class="looping-image" src="/imagens/0.png" alt="Imagem em loop vertical"></div>   
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <p>Starting in <span id="countdown">3</span> seconds...</p>
+        </div>
     </div>
-    <div class="containerJogo">
-        <canvas id="canvas"></canvas>
-        <div id="carro"></div>
-        <div id="obstacles-container"></div>
+    <div class="container">
+        <div class="image-container">
+            <img class="looping-image" src="/imagens/0.png" alt="Imagem em loop vertical">
+            <img class="looping-image" src="/imagens/0.png" alt="Imagem em loop vertical">
+            <img class="looping-image" src="/imagens/0.png" alt="Imagem em loop vertical">
+        </div>
+        <div class="containerJogo">
+            <canvas id="canvas"></canvas>
+            <div id="carro"></div>
+            <div id="obstacles-container"></div>
+        </div>
     </div>
     <div class="player-info">
-        <img src="/imagens/gasolina.png" alt="Ícone do jogador"> <span id="player-life">Vida: 100</span>
-        <br>
-        <img src="/imagens/dano.png" alt="Ícone do jogador"> <span id="player-damage">Dano Sofrido: 0</span>
+        <img src="/imagens/gasolina.png" alt="Ícone do jogador"> <span id="player-life">Vida: 100</span> 
     </div>
 </body>
 <footer>

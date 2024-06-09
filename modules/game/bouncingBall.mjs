@@ -1,11 +1,9 @@
 // Importa funções utilitárias de módulos específicos
-import { toRad } from "../engine/math.mjs";
 import { animate } from "../engine/animation.mjs";
 import { down } from "../engine/input.mjs";
 
-// Seleciona o elemento canvas do DOM e obtém o contexto de renderização 2D
+// Seleciona o elemento canvas do DOM
 const canvas = document.querySelector('#canvas');
-const ctx = canvas.getContext('2d');
 
 // Define a velocidade do carro e sua posição inicial
 const SPEED = 150; // Velocidade do carro
@@ -39,6 +37,34 @@ image.onload = function() {
     console.log('Imagem carregada:', imagePath);
     animate(canvas, { update, draw }); // Inicia a animação após o carregamento da imagem
 };
+
+// Função para iniciar o jogo
+function startGame() {
+    gameLoop(); // Inicia o loop do jogo
+    console.log('Script carregado');
+}
+
+// Função de contagem regressiva
+function countdown() {
+    let count = 3;
+    const countdownElement = document.getElementById('countdown');
+    const popup = document.getElementById('popup');
+
+    const interval = setInterval(() => {
+        countdownElement.textContent = count;
+        if (count === 0) {
+            clearInterval(interval);
+            popup.style.display = 'none'; // Esconde o pop-up
+            startGame(); // Inicia o jogo
+        }
+        count--;
+    }, 1000);
+}
+
+window.onload = function() {
+    countdown(); // Inicia o contador quando a página carrega
+};
+
 
 // Função de atualização para movimentar o carro
 function update(time) {
@@ -158,7 +184,7 @@ function moveObstacles() {
 function gameLoop() {
     if (!isGameOver) {
         moveObstacles(); // Move os obstáculos e kits de reparo
-        if (Math.random() < 0.01) {
+        if (Math.random() < 0.02) {
             createObstacle(); // Cria novos obstáculos com uma pequena chance a cada frame
         }
         if (Math.random() < 0.001) {
@@ -167,8 +193,3 @@ function gameLoop() {
         requestAnimationFrame(gameLoop); // Solicita o próximo frame da animação
     }
 }
-
-gameLoop(); // Inicia o loop do jogo
-
-// Verifique se o código de animação está sendo chamado
-console.log('Script carregado');
