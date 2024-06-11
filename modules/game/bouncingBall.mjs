@@ -37,34 +37,44 @@ image.onload = function() {
     console.log('Imagem carregada:', imagePath);
     animate(canvas, { update, draw }); // Inicia a animação após o carregamento da imagem
 };
+document.addEventListener('DOMContentLoaded', (event) => {
+    const popup = document.getElementById('popup');
+    const countdownElement = document.getElementById('countdown');
+    const countdownSound = document.getElementById('countdown-sound');
+    const spaceSound = document.getElementById('space-sound');
+    let countdown = 3;
+
+    function startGame() {
+        popup.style.display = 'none';
+        gameLoop();
+    }
+
+    function updateCountdown() {
+        if (countdown > 0) {
+            countdownElement.textContent = countdown;
+            countdownSound.play();
+            countdown--;
+            setTimeout(updateCountdown, 1000);
+        } else {
+            countdownElement.textContent = "Let's go";
+            setTimeout(startGame, 1000);
+        }
+    }
+
+    updateCountdown();
+
+    document.addEventListener('keydown', (event) => {
+        if (event.code === 'Space') {
+            spaceSound.play();
+        }
+    });
+});
 
 // Função para iniciar o jogo
 function startGame() {
     gameLoop(); // Inicia o loop do jogo
     console.log('Script carregado');
 }
-
-// Função de contagem regressiva
-function countdown() {
-    let count = 3;
-    const countdownElement = document.getElementById('countdown');
-    const popup = document.getElementById('popup');
-
-    const interval = setInterval(() => {
-        countdownElement.textContent = count;
-        if (count === 0) {
-            clearInterval(interval);
-            popup.style.display = 'none'; // Esconde o pop-up
-            startGame(); // Inicia o jogo
-        }
-        count--;
-    }, 1000);
-}
-
-window.onload = function() {
-    countdown(); // Inicia o contador quando a página carrega
-};
-
 
 // Função de atualização para movimentar o carro
 function update(time) {
@@ -145,13 +155,13 @@ function moveObstacles() {
             obstacle.remove();
         } else {
             // Move o obstáculo para baixo
-            obstacle.style.top = obstacleTop + 6 + 'px';
+            obstacle.style.top = obstacleTop + 2 + 'px';
             
             // Atualiza dinamicamente a posição y do carro
             let yCarro = 555; // Posição atual do carro
 
             // Verifica a colisão com o carro
-            if (obstacleTop + 50 >= yCarro && obstacleTop <= yCarro + 22 && Math.abs(x - parseInt(obstacle.style.left)) < 30) {
+            if (obstacleTop + 50 >= yCarro && obstacleTop <= yCarro + 52 && Math.abs(x - parseInt(obstacle.style.left)) < 40) {
                 if (obstacle.classList.contains('repair-kit')) {
                     // Kit de reparo: aumenta a vida do jogador
                     playerLife = Math.min(playerLife + 50, 100); // Aumenta a vida, mas não passa de 100
