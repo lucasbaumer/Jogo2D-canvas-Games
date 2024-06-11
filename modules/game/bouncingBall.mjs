@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let score = 0;
     const scoreDisplay = document.getElementById('player-score'); // Elemento DOM que exibe a pontuação
 
+
     function startGame() {
         popup.style.display = 'none';
         backgroundMusic.play(); // Inicia a música de fundo
@@ -130,7 +131,7 @@ function createObstacle() {
     // Loop para garantir que o novo obstáculo não se sobreponha aos existentes
     do {
         // Gera uma nova posição para o obstáculo
-        newLeft = Math.floor(Math.random() * (canvas.width + 0));
+        newLeft = Math.floor(Math.random() * (canvas.width - 50));
         obstacle.style.left = newLeft + 'px';
         obstacle.style.top = '0px'; // Inicializa o topo do obstáculo
 
@@ -138,7 +139,7 @@ function createObstacle() {
         isOverlapping = Array.from(document.querySelectorAll('.obstacle')).some(existingObstacle => {
             const existingLeft = parseInt(existingObstacle.style.left);
             const existingTop = parseInt(existingObstacle.style.top);
-            return Math.abs(existingLeft - newLeft) < 50 && Math.abs(existingTop - 0) < 50;
+            return Math.abs(existingLeft - newLeft) < 80 && Math.abs(existingTop - 0) < 80;
         });
     } while (isOverlapping);
 
@@ -169,25 +170,31 @@ function moveObstacles() {
             obstacle.remove();
         } else {
             // Move o obstáculo para baixo
-            obstacle.style.top = obstacleTop + 6 + 'px';
+            obstacle.style.top = obstacleTop + 1 + 'px';
             
             // Atualiza dinamicamente a posição y do carro
             let yCarro = 555; // Posição atual do carro
+            const SomBatda1 = document.getElementById('SomBatda1');
+            const SomBatda2 = document.getElementById('SomBatda2');
+            const SomBatda3 = document.getElementById('SomBatda3');
 
             // Verifica a colisão com o carro
-            if (obstacleTop + 50 >= yCarro && obstacleTop <= yCarro + 52 && Math.abs(x - parseInt(obstacle.style.left)) < 40) {
+            if (obstacleTop + 50 >= yCarro && obstacleTop <= yCarro + 62 && Math.abs(x - parseInt(obstacle.style.left)) < 60) {
                 if (obstacle.classList.contains('repair-kit')) {
                     // Kit de reparo: aumenta a vida do jogador
                     playerLife = Math.min(playerLife + 50, 100); // Aumenta a vida, mas não passa de 100
                 } else if (obstacle.classList.contains('type1')) {
                     // Tipo de obstáculo 1: diminui a vida do jogador
                     playerLife -= 20;
+                    SomBatda1.play();
                 } else if (obstacle.classList.contains('type2')) {
                     // Tipo de obstáculo 2: diminui a vida do jogador mais significativamente
                     playerLife -= 30;
+                    SomBatda2.play();
                 } else if (obstacle.classList.contains('type3')) {
                     // Tipo de obstáculo 3: outro efeito (exemplo)
                     playerLife -= 40;
+                    SomBatda3.play();
                 }
                 playerLifeDisplay.textContent = `Vida: ${playerLife}`; // Atualiza a exibição da vida do jogador
 
