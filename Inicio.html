@@ -17,6 +17,7 @@
         background-color: #446b9e;
         font-family: cursive;
         color: white;
+        overflow-y: hidden;
     }
     
     .start-screen {
@@ -26,30 +27,40 @@
     
     h1 {
         font-size: 4rem;
-        margin-bottom: 20px;
+        margin-bottom: 1.5px;
+        margin-top: 1px;
     }
     
     p{
-        margin-bottom: 40px;
+        margin-bottom: 10px;
     }
 
  
-    
- 
-    
-    .alunos{
-        position: absolute; 
-        bottom: 15px; 
-        right: 20px;
-        padding: 10px;
+    .info-button {
+        background-color: #ff0000;
         color: white;
-        font-family: cursive;
-        font-size: 1rem;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 5px;
+        transition: background-color 0.3s, transform 0.3s;
     }
+    .info-button:hover {
+        background-color: #6b0000;
+        transform: scale(1.1);
+    }
+    .info-button i {
+        margin-right: 8px;
+    }
+
 </style>
 <body>
     <div class="start-screen">
         <h1>Blaze Driver</h1>
+        <p>Controle o Blaze e seus amigos em uma aventura muito desafiadora!!</p>
+        <p>Escolha seu personagem:</p>
         <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -66,7 +77,7 @@
             margin: 0;
         }
         .carousel-container {
-            width: 70%;
+            width: 67%;
             max-width: 600px;
             margin: auto;
             overflow: hidden;
@@ -116,6 +127,7 @@
         .nav-buttons button:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
+
     </style>
 </head>
 <body>
@@ -158,6 +170,8 @@
         <button id="nextBtn">Próximo</button>
     </div>
 </div>
+    <button class="info-button" id="infoBtn"><i class="fas fa-info-circle"></i>Mais informações sobre o jogo</button>    
+
 
 <script>
     const carouselSlide = document.querySelector('.carousel-slide');
@@ -197,6 +211,10 @@
         });
     });
 
+    infoBtn.addEventListener('click', () => {
+        window.location.href = "info.html";
+    });
+
     // Ajustar a posição inicial
     updateCarousel();
 
@@ -213,11 +231,6 @@
 
 </body>
 </html>
-        <p>Controle o blaze em uma aventura muito desafiadora!!</p>
-    </div>
-
-    <div class="alunos">
-        <p>Desenvolvedores: Lucas Baumer, Matheus Kormann, Murilo Mayer</p>        
     </div>
 
 </body>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mais Informações</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        background-color: #446b9e;
+        font-family: cursive;
+        color: white;
+    } 
+    
+    h1 {
+        font-size: 4rem;
+        margin-bottom: 9px;
+        margin-top: 1px;
+    }
+    
+    h3 {
+        margin-bottom: 3px;
+        font-size: 1.4rem;
+        text-align: left;
+    }
+
+    .info-section {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .info-section img {
+        margin-right: 8px;
+        width: 50px;
+        height: 50px;
+    }
+
+    p {
+        margin-bottom: 20px;
+        font-size: 1.2rem;
+    }
+
+    .info {
+        text-align: center;
+        font-size: 1.4rem;
+        margin-top: 20px;
+    }
+
+    .info-button {
+        background-color: #ff0000;
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s, transform 0.3s;
+        margin-bottom: 15px;
+    }
+    .info-button:hover {
+        background-color: #6b0000;
+        transform: scale(1.1);
+    }
+
+
+</style>
+<body>
+    <div class="info">
+    <h1>Como jogar</h1>
+    <h3><b>Escolha Seu Personagem:</b></h3>
+    <div class="info-section">
+        <img src="/imagens/ImagenJogo_Blaze.png" alt="Cone">
+        <p>Selecione entre diversos personagens, cada um com um carro exclusivo, para iniciar sua aventura.</p>
+    </div>
+    
+
+    <h3><b>Controle e Habilidades:</b></h3>
+    <div class="info-section">
+        <img src="/imagens/setas.png" alt="Cone">
+        <p>Use as setas para guiar seu carro pela estrada, desviando dos obstáculos para não perder vida.</p>
+    </div>
+
+    <h3><b>Obstáculos na Estrada:</b></h3>
+
+    <div class="info-section">
+        <img src="/imagens/cone.png" alt="Cone">
+        <p>Cone: Cuidado com os cones na estrada que podem danificar seu carro. - causa <b>20</b> de dano</p>
+    </div>
+    <div class="info-section">
+        <img src="/imagens/barreira-de-transito.png" alt="Barreira de trânsito">
+        <p>Barreira de Trânsito: Evite colidir com as barreiras de trânsito para manter sua jornada segura. - causa <b>30</b> de dano</p>
+    </div>
+    <div class="info-section">
+        <img src="/imagens/carro.png" alt="Barreira de trânsito">
+        <p>Carro: Cuidado com os carros na estrada! Eles podem surgir rapidamente e representar um grande perigo. - causa <b>40</b> de dano</p>
+    </div>
+    
+    <h3><b>Engrenagens de Recuperação de Vida:</b></h3>
+    <div class="info-section">
+        <img src="/imagens/chave-inglesa.png" alt="Barreira de trânsito">
+        <p>Chave Inglesa: Esta ferramenta é essencial para sua jornada! - recupera <b>50</b> de vida</p>
+    </div>
+
+    <h3><b>Objetivo Final:</b></h3>
+    <div class="info-section">
+        <img src="/imagens/trofeu.png" alt="Barreira de trânsito">
+        <p>Percorra a maior distância possível sem perder toda a sua vida para obter a maior pontuação e desafiar seus amigos.</p>
+    </div>
+    
+
+    <h4>Desenvolvedores: Lucas Baumer, Matheus Kormann, Murilo Mayer</h4>  
+
+    <button class="info-button" id="inicioBtn"><i class="fas fa-info-circle"></i>Voltar ao Inicio</button>         
+    </div>
+    
+    <script>
+        inicioBtn.addEventListener('click', () => {
+            window.location.href = "inicio.html";
+        });
+    </script>
+</body>
+</html>
