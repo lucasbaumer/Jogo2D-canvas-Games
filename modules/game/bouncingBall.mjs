@@ -17,12 +17,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function updateCountdown() {
         if (countdown > 0) {
-            countdownElement.textContent = 'Starting in ' + countdown + ' seconds...'; 
+            countdownElement.textContent = 'Começando em ' + countdown + ' segundos...'; 
             countdownSound.play();
             countdown--;
             setTimeout(updateCountdown, 1000);
         } else {
-            countdownElement.textContent = "Let's go";
+            countdownElement.textContent = "Vai!!";
             setTimeout(startGame, 1000);
         }
     }
@@ -32,6 +32,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         scoreDisplay.textContent = `Pontos: ${score}`;
         if (!isGameOver) {
             setTimeout(updateScore, 1000); // Atualiza a pontuação a cada segundo
+        }
+        if(isGameOver){
+            alert('Você conseguiu ' + (score - 1) + ' pontos' )
         }
     }
 
@@ -191,7 +194,7 @@ function moveObstacles() {
                 // Verifica se a vida do jogador chegou a zero
                 if (playerLife <= 0) {
                     isGameOver = true;
-                    alert('Game Over!');
+                    window.alert('Fim de jogo!');
                     window.location.href = "inicio.html"; // Redireciona para a página inicial
                 }
 
