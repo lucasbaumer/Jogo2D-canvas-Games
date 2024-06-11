@@ -1,9 +1,58 @@
-// Importa funções utilitárias de módulos específicos
+document.addEventListener('DOMContentLoaded', (event) => {
+    const popup = document.getElementById('popup');
+    const countdownElement = document.getElementById('countdown');
+    const countdownSound = document.getElementById('countdown-sound');
+    const spaceSound = document.getElementById('space-sound');
+    const backgroundMusic = document.getElementById('background-music');
+    let countdown = 3;
+    let score = 0;
+    const scoreDisplay = document.getElementById('player-score'); // Elemento DOM que exibe a pontuação
+
+    function startGame() {
+        popup.style.display = 'none';
+        backgroundMusic.play(); // Inicia a música de fundo
+        gameLoop();
+        updateScore(); // Inicia a atualização da pontuação
+    }
+
+    function updateCountdown() {
+        if (countdown > 0) {
+            countdownElement.textContent = 'Starting in ' + countdown + ' seconds...'; 
+            countdownSound.play();
+            countdown--;
+            setTimeout(updateCountdown, 1000);
+        } else {
+            countdownElement.textContent = "Let's go";
+            setTimeout(startGame, 1000);
+        }
+    }
+
+    function updateScore() {
+        score++;
+        scoreDisplay.textContent = `Pontos: ${score}`;
+        if (!isGameOver) {
+            setTimeout(updateScore, 1000); // Atualiza a pontuação a cada segundo
+        }
+    }
+
+    updateCountdown();
+
+    document.addEventListener('keydown', (event) => {
+        if (event.code === 'Space') {
+            spaceSound.play();
+        }
+    });
+});
+
+// Restante do código de animação e jogo
+// ...
+
 import { animate } from "../engine/animation.mjs";
 import { down } from "../engine/input.mjs";
 
-// Seleciona o elemento canvas do DOM
+// Seleciona o elemento canvas do DOM e obtém o contexto de renderização 2D
 const canvas = document.querySelector('#canvas');
+const ctx = canvas.getContext('2d');
 
 // Define a velocidade do carro e sua posição inicial
 const SPEED = 150; // Velocidade do carro
@@ -37,44 +86,6 @@ image.onload = function() {
     console.log('Imagem carregada:', imagePath);
     animate(canvas, { update, draw }); // Inicia a animação após o carregamento da imagem
 };
-document.addEventListener('DOMContentLoaded', (event) => {
-    const popup = document.getElementById('popup');
-    const countdownElement = document.getElementById('countdown');
-    const countdownSound = document.getElementById('countdown-sound');
-    const spaceSound = document.getElementById('space-sound');
-    let countdown = 3;
-
-    function startGame() {
-        popup.style.display = 'none';
-        gameLoop();
-    }
-
-    function updateCountdown() {
-        if (countdown > 0) {
-            countdownElement.textContent = countdown;
-            countdownSound.play();
-            countdown--;
-            setTimeout(updateCountdown, 1000);
-        } else {
-            countdownElement.textContent = "Let's go";
-            setTimeout(startGame, 1000);
-        }
-    }
-
-    updateCountdown();
-
-    document.addEventListener('keydown', (event) => {
-        if (event.code === 'Space') {
-            spaceSound.play();
-        }
-    });
-});
-
-// Função para iniciar o jogo
-function startGame() {
-    gameLoop(); // Inicia o loop do jogo
-    console.log('Script carregado');
-}
 
 // Função de atualização para movimentar o carro
 function update(time) {
@@ -116,7 +127,7 @@ function createObstacle() {
     // Loop para garantir que o novo obstáculo não se sobreponha aos existentes
     do {
         // Gera uma nova posição para o obstáculo
-        newLeft = Math.floor(Math.random() * (canvas.width - 50));
+        newLeft = Math.floor(Math.random() * (canvas.width + 0));
         obstacle.style.left = newLeft + 'px';
         obstacle.style.top = '0px'; // Inicializa o topo do obstáculo
 
@@ -155,7 +166,7 @@ function moveObstacles() {
             obstacle.remove();
         } else {
             // Move o obstáculo para baixo
-            obstacle.style.top = obstacleTop + 2 + 'px';
+            obstacle.style.top = obstacleTop + 6 + 'px';
             
             // Atualiza dinamicamente a posição y do carro
             let yCarro = 555; // Posição atual do carro
