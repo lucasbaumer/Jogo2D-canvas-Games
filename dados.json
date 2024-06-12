@@ -1,28 +1,28 @@
-[
-    {
-      "character": "Blaze",
-      "record":155
-    },
-    {
+{
+    "highScores": [
+      {
+        "character": "Blaze",
+        "record": 100
+      },
+      {
         "character": "Crusher",
-        "record":10
-    },
-    {
+        "record": 1
+      },
+      {
         "character": "Darington",
-        "record":0
-    },
-    {
+        "record": 0
+      },
+      {
         "character": "Starla",
-        "record":0
-    },
-    {
+        "record": 0
+      },
+      {
         "character": "Stripes",
-        "record":0
-    },
-    {
+        "record": 0
+      },
+      {
         "character": "Zeg",
-        "record":0
-    }
-    
-  ]
-  
+        "record": 0
+      }
+    ]
+  }

@@ -42,8 +42,7 @@ function updateScore() {
         scoreDisplay.textContent = `Pontos: ${score}`;
         setTimeout(updateScore, 1000);
     } else {
-        alert(`Você conseguiu ${score - 1} pontos`);
-        saveHighScore(score - 1);
+        saveHighScore(score);
     }
 }
 
@@ -72,49 +71,64 @@ function fetchCharacterRecord() {
     fetch('/dados.json')
         .then(response => response.json())
         .then(data => {
-            const characterRecord = data.find(record => record.character === imgParam);
-            highScoreDisplay.textContent = `Recorde: ${characterRecord.record} pontos`;
+            console.log('Dados recebidos:', data); // Log de depuração
+            if (data.highScores && Array.isArray(data.highScores)) {
+                const characterRecord = data.highScores.find(record => record.character === imgParam);
+                highScoreDisplay.textContent = `Recorde: ${characterRecord ? characterRecord.record : 0} pontos`;
+            } else {
+                console.error('Estrutura do JSON inesperada:', data);
+            }
         })
         .catch(error => {
-            console.error('Error fetching character records:', error);
+            console.error('Erro ao buscar os recordes dos personagens:', error);
         });
 }
 
-function saveHighScore(score) {
-    fetch('/dados.json')
-        .then(response => response.json())
-        .then(data => {
-            const characterRecord = data.find(record => record.character === imgParam);
-            console.log(characterRecord.record);
-            if (score > characterRecord.record) {
-                characterRecord.record = score;
-                highScoreDisplay.textContent = `Recorde: ${score} pontos`;
-                Window.alert("Parabéns, você bateu o recorde!");
-                // Save the updated character record
-                fetch('/save-record', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(characterRecord)
-                })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Character record saved successfully.');
-                    } else {
-                        console.error('Failed to save character record.');
+async function saveHighScore(score) {
+    try {
+        const response = await fetch('/dados.json');
+        const data = await response.json();
+        console.log('Dados para salvar:', data); // Log de depuração
+
+        if (data.highScores && Array.isArray(data.highScores)) {
+            const characterRecord = data.highScores.find(record => record.character === imgParam);
+
+            if (characterRecord) {
+                if (score > characterRecord.record) {
+                    characterRecord.record = score;
+                    highScoreDisplay.textContent = `Recorde: ${score} pontos`;
+
+                    const saveResponse = await fetch('/dados.json', {
+                        method: 'post',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ highScores: data.highScores })
+                    });
+
+                    if (!saveResponse.ok) {
+                        throw new Error('Erro ao salvar o recorde');
                     }
-                })
-                .catch(error => {
-                    console.error('Error saving character record:', error);
-                });
-                window.location.href = "inicio.html";
+                    else{
+                        console.log('Recorde salvo com sucesso');
+                        alert('Parabéns, você bateu o recorde!');
+                        window.location.href = 'inicio.html';
+                        
+                    }
+                }
+                else
+                {
+                    window.location.href = 'inicio.html';
+                }
+            } else {
+                console.error('Recorde do personagem não encontrado');
             }
-            else{window.location.href = "inicio.html";}
-        })
-        .catch(error => {
-            console.error('Error saving high score:', error);
-        });
+        } else {
+            console.error('Estrutura do JSON inesperada:', data);
+        }
+    } catch (error) {
+        console.error('Erro ao buscar e salvar os recordes:', error);
+    }
 }
 
 function update(time) {
@@ -177,25 +191,21 @@ function moveObstacles() {
             const SomBatda2 = document.getElementById('SomBatda2');
             const SomBatda3 = document.getElementById('SomBatda3');
 
-            if (obstacleTop + 50 >= yCarro && obstacleTop <= yCarro + 52 && Math.abs(x - parseInt(obstacle.style.left)) < 40) {
+            if (obstacleTop + 50 >= yCarro && obstacleTop <= yCarro + 64 && Math.abs(x - parseInt(obstacle.style.left)) < 40) {
                 if (obstacle.classList.contains('repair-kit')) {
                     playerLife = Math.min(playerLife + 50, 100);
                 } else if (obstacle.classList.contains('type1')) {
                     playerLife -= 20;
-                    
                 } else if (obstacle.classList.contains('type2')) {
                     playerLife -= 30;
-                
                 } else if (obstacle.classList.contains('type3')) {
                     playerLife -= 40;
-                    
                 }
                 playerLifeDisplay.textContent = `Vida: ${playerLife}`;
 
                 if (playerLife <= 0) {
                     isGameOver = true;
                     alert('Fim de jogo!');
-                    saveHighScore(score);
                 }
 
                 obstacle.remove();
