@@ -41,8 +41,6 @@ function updateScore() {
         score++;
         scoreDisplay.textContent = `Pontos: ${score}`;
         setTimeout(updateScore, 1000);
-    } else {
-        saveHighScore(score);
     }
 }
 
@@ -105,6 +103,14 @@ async function saveHighScore(score) {
                         },
                         body: JSON.stringify({ highScores: data.highScores })
                     });
+
+                    if (!saveResponse.ok) {
+                        throw new Error('Erro ao salvar o recorde');
+                    } else {
+                        console.log('Recorde salvo com sucesso');
+                        alert('Parabéns, você bateu o recorde!');
+                        window.location.href = 'inicio.html';
+                    }
 
                     if (!saveResponse.ok) {
                         throw new Error('Erro ao salvar o recorde');
@@ -187,9 +193,6 @@ function moveObstacles() {
             obstacle.style.top = `${obstacleTop + 5}px`;
 
             let yCarro = 555;
-            const SomBatda1 = document.getElementById('SomBatda1');
-            const SomBatda2 = document.getElementById('SomBatda2');
-            const SomBatda3 = document.getElementById('SomBatda3');
 
             if (obstacleTop + 50 >= yCarro && obstacleTop <= yCarro + 64 && Math.abs(x - parseInt(obstacle.style.left)) < 40) {
                 if (obstacle.classList.contains('repair-kit')) {
@@ -206,6 +209,7 @@ function moveObstacles() {
                 if (playerLife <= 0) {
                     isGameOver = true;
                     alert('Fim de jogo!');
+                    window.location.href = 'inicio.html';
                 }
 
                 obstacle.remove();
